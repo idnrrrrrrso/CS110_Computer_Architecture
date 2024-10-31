@@ -1,0 +1,130 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{float}
+\usepackage{listings}
+\usepackage{setspace}
+\usepackage{verbatim}
+\usepackage{fancyhdr}
+\usepackage{titling}
+
+\pagestyle{fancy}
+\fancyhf{}
+\AtEndDocument{\fancyfoot[LE,LO]{The following TA(s) are responsible for this homework:\\
+Xinxin Yu: yuxx@shanghaitech.edu.cn\\
+Lei Jia: jialei2022@shanghaitech.edu.cn}} 
+
+\title{CS110 sp24 HW5}
+\date{Due: $14^{th}$ May}
+
+\begin{document}
+
+\maketitle
+
+You should finish this homework either by writing it \textbf{neatly} by hand or using LaTeX (\textbf{highly recommended!!!}). You can find the \texttt{.tex} file on Piazza.
+\section{T/I/O Breakdown}
+1. Given that we have a direct-mapped byte-addressed cache with capacity 32B and block size of 8B. Of the 32 bits in each address, which bits are offset bits? Which bits are index bits? What about tag? \textit{Note: Please provide your answer in the format [n:m] to denote the range from the $m^{th}$ bit to the $n^{th}$ bit (e.g., [1:0] represents the two lowest bits).}
+\begin{table}[H]
+    \centering
+    \ttfamily
+    \Large
+    \setlength{\tabcolsep}{12pt}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Tag & Index & Offset \\
+        \hline
+         &  & \\ \hline
+    \end{tabular}
+\end{table}
+
+\noindent 2. Given the cache in question 1.1, assuming that we will access memory addresses in the following order, classify each of the accesses as a cache hit (H), cache miss (M) or cache miss with replacement (R). Ignore miss types for now.
+\textit{Note: The distinction of M and R here is just for your understanding, and that the cache doesn't behave differently for these cases.}
+\begin{table}[H]
+    \centering
+    \ttfamily
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Address & Hit, Miss, Replace & Miss Type \\ \hline
+        0x00000004 & & \\ \hline
+        0x00000005 & & \\ \hline
+        0x00000068 & & \\ \hline
+        0x000000C8 & & \\ \hline
+        0x00000068 & & \\ \hline
+        0x000000DD & & \\ \hline
+        0x00000045 & & \\ \hline
+        0x000000CF & & \\ \hline
+        0x000000F3 & & \\ \hline
+    \end{tabular}
+\end{table}
+
+\section{Set-Associative Caches}
+Given that we have a 2-way set associative cache. This time we have an 8-bit address space, 8B blocks, and a cache size of 32B. Classify each of the accesses as a cache hit (H), cache miss (M) or cache miss with replacement (R). Assume that we have an LRU replacement policy. Ignore miss types for now.\\
+\begin{table}[H]
+    \centering
+    \ttfamily
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Address                 & Hit, Miss, Replace & Miss Type\\ \hline
+        0b0000 0100                   &                    & \\ \hline
+        0b0000 0101                   &                    & \\ \hline
+        0b0110 1000                   &                    & \\ \hline
+        0b1100 1000                   &                    & \\ \hline
+        0b0110 1000                   &                    & \\ \hline
+        0b1101 1101                   &                    & \\ \hline
+        0b0100 0101                   &                    & \\ \hline
+        0b0000 0100                   &                    & \\ \hline
+        0b0011 0000                   &                    & \\ \hline
+        0b1100 1011                   &                    & \\ \hline
+        0b0100 0010                   &                    & \\ \hline
+    \end{tabular}
+\end{table}
+
+\section{The 3C's Cache Misses}
+Go back to question 1 and 2 and classify each miss as one of the three types of misses.\\
+
+\section{Code Analysis}
+Consider the following function that takes in two integer arrays, a (of length a\rule{0.2cm}{0.4pt}len) and b (of length b\rule{0.2cm}{0.4pt}len), and returns the 1D convolution of a and b. Assume results is properly allocated.
+Let a=0x1000, b=0x2000, results=0x3030, a\rule{0.2cm}{0.4pt}len=4, and b\rule{0.2cm}{0.4pt}len=2. \textit{Note: The register keyword in C provides a hint to the compiler to consider storing a variable in a processor register. }
+
+\lstset{
+  basicstyle=\ttfamily,
+  breaklines=true,
+  frame=single,
+}
+
+\begin{lstlisting}[language=C]
+void convolve_1d(int* a, int a_len, int* b, int b_len, int* results) {
+    for (int i = 0; i < a_len - b_len + 1; i++) {
+        register int sum = 0;
+        for (int j = 0; j < b_len; j++) {
+            sum += b[j] * a[i + j];
+        }
+        results[i] = sum;
+    }
+}
+\end{lstlisting}
+1. Given that we have a single-level, direct-mapped 64B cache with 16B blocks and 16-bit addresses. What is the overall hit rate for a call to convolve\rule{0.2cm}{0.4pt}1d?\\
+\\
+\\
+2. Given that we have a 2-way set associative cache of the same size with a LRU replacement policy. What is the overall hit rate for a call to convolve\rule{0.2cm}{0.4pt}1d?\\
+\\
+\\
+3. Given that we have a fully associative cache of the same size with a LRU replacement policy. What is the overall hit rate for a call to convolve\rule{0.2cm}{0.4pt}1d?\\
+
+\section{AMAT}
+1. In a 2-level cache system, if L1 has a local miss rate of 50\% and the global miss rate of L2 is 20\%, what is the local miss rate of L2?\\
+\\
+\\
+Suppose your system consists of:\par
+\begin{enumerate}
+    \item An L1 that has a hit time of 2 cycles and has a local miss rate of 20\%.
+    \item An L2 that has a hit time of 15 cycles and has a global miss rate of 5\%.
+    \item Main memory where accesses take 100 cycles.
+\end{enumerate}
+2.What is the AMAT of the system?\\
+\\
+\\
+3. Suppose we want to reduce the AMAT of the system to 8 cycles or lower by adding in a L3. If the L3 has a local miss rate of 25\%, what is the largest hit time that the L3 can have?\\
+
+
+
+\end{document}
