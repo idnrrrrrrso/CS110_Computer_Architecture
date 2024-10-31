@@ -10,3 +10,18 @@
 [submodule "Homework/HW8"]
 	path = Homework/HW8
 	url = https://github.com/cs110-24s/homework-8-idnrrrrrrso
+[submodule "Projects/project1-2"]
+	path = Projects/project1-2
+	url = https://github.com/cs110-24s/project1-2-idnrrrrrrso
+[submodule "Projects/project1-1"]
+	path = Projects/project1-1
+	url = https://github.com/cs110-24s/project1-1-idnrrrrrrso
+[submodule "Projects/project2-1"]
+	path = Projects/project2-1
+	url = https://github.com/cs110-24s/project2-1-idnrrrrrrso
+[submodule "Projects/project2-2"]
+	path = Projects/project2-2
+	url = https://github.com/cs110-24s/project2-2-idnrrrrrrso
+[submodule "Projects/project4"]
+	path = Projects/project4
+	url = https://github.com/cs110-24s/project4-idnrrrrrrso
