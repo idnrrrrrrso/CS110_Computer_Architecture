@@ -1,0 +1,19 @@
+main:
+	t0 = 0
+	t1 = 1
+	t3 = 9
+
+fib:
+	if t3 == 0, finish
+	else, 
+	t2 = t1 + t0
+	t0 = t1
+	t1 = t2
+	t3 -=1
+	jump to fib
+
+finish:
+	a0 = 1
+	a1 = t0
+	
+

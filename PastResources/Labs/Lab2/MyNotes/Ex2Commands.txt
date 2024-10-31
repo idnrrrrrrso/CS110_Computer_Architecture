@@ -1,0 +1,18 @@
+gcc -g -o hello hello.c
+gdb hello
+break hello.c:8
+run
+
+很多个step，直到报错
+这里的报错和题目给出的描述不太一样：
+Single stepping until exit from function __tmainCRTStartup,
+which has no line number information.
+[Thread 22776.0x5df4 exited with code 0]
+[Inferior 1 (process 22776) exited normally]
+(gdb) finish
+The program is not being run.
+
+finish
+
+或许是因为上面这些都是在win环境下做的
+现在切换到linux(wsl)下面试试
