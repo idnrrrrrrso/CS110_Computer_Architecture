@@ -1,0 +1,7 @@
+一个 move and add 的耗时是
+max{20+45, 5}=65
+
+non_piplined 里共有4个 move and add, 4*65=260
+再加上 clk-to-q 和 set-up time
+总共就是 260+10+10=280ns
+那么就是 1/280ns = 3.57*10^6 Hz
