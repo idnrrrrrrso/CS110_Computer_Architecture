@@ -4,3 +4,9 @@
 [submodule "Homework/HW3"]
 	path = Homework/HW3
 	url = https://github.com/cs110-24s/homework-3-idnrrrrrrso
+[submodule "Homework/HW6"]
+	path = Homework/HW6
+	url = https://github.com/cs110-24s/homework-6-idnrrrrrrso
+[submodule "Homework/HW8"]
+	path = Homework/HW8
+	url = https://github.com/cs110-24s/homework-8-idnrrrrrrso
